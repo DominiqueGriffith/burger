@@ -6,19 +6,28 @@ var burger = require("../models/burger.js");
 
 // Create all our routes and set up logic within those routes where required.
 router.get("/", function(req, res) {
-    burger.all(function(data) {
+    burger.selectAll(function(data) {
       var hbsObject = {
-        burger: data
+        burgers: data
       };
       console.log(hbsObject);
       res.render("index", hbsObject);
     });
   });
   
-  router.post("/api/burger", function(req, res) {
-    burger.create(["name"], [req.body.name], function(result) {
+  router.post("/api/posts", function(req, res) {
+    burger.insertOne(["name"], [req.body.name], function(result) {
       // Send back the ID of the new quote
       res.json({ id: result.insertId });
+      console.log( res.json({ id: result.insertId }));
+    });
+  });
+
+  router.put("/api/posts", function(req, res) {
+    burger.update(["name"], [req.body.name], function(result) {
+      // Send back the ID of the new quote
+      res.json({ id: result.insertId });
+      console.log( res.json({ id: result.insertId }));
     });
   });
   

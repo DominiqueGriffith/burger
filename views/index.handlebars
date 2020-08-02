@@ -1,13 +1,3 @@
-<ul>
-    {{#each burger}}
-    <li>
-        <p><span class ="label">Burger: </span>{{this.burger}}</p>
-    
-    <button data-id="{{this.id}}" class="burger">Delete </button>
-    <a href="/{{this.id}}">Update this burger</a>
-    </li>
-</ul>
-
 
 <h2>Add Burger</h2>
 
@@ -22,4 +12,13 @@
 </form>
 <h4>Enter a burger you want to eat click the "Add Burger" button </h4>
 
+<ul>
+  {{#each burger}}
+    {{#unless devoured}}
+      {{> burger devoured=false}}
+    {{/unless}}
+  {{/each}}
+</ul>
+
 <button id="devour">Devour it!</button>
+
