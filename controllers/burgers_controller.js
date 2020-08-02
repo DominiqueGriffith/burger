@@ -2,11 +2,11 @@ var express = require("express");
 
 var router = express.Router();
 
-var burger = require("../models/burger.js");
+var Burger = require("../models/burger.js");
 
 // Create all our routes and set up logic within those routes where required.
 router.get("/", function(req, res) {
-    burger.selectAll(function(data) {
+    Burger.selectAll(function(data) {
       var hbsObject = {
         burgers: data
       };
@@ -16,15 +16,15 @@ router.get("/", function(req, res) {
   });
   
   router.post("/api/posts", function(req, res) {
-    burger.insertOne(["name"], [req.body.name], function(result) {
+    Burger.insertOne(["burger_name"], [req.body.burger_name], function(result) {
       // Send back the ID of the new quote
       res.json({ id: result.insertId });
       console.log( res.json({ id: result.insertId }));
     });
   });
 
-  router.put("/api/posts", function(req, res) {
-    burger.update(["name"], [req.body.name], function(result) {
+  router.put("/api/put", function(req, res) {
+    Burger.update(["name"], [req.body.name], function(result) {
       // Send back the ID of the new quote
       res.json({ id: result.insertId });
       console.log( res.json({ id: result.insertId }));
