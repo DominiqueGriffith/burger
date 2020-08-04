@@ -4,10 +4,11 @@
     <div class="col-md-6">
         <button  id="devour">Devour it!</button>
 <ul>
-  {{#each burger}}
-    {{#unless devoured}}
-      {{> burger devoured=false}}
-    {{/unless}}
+  {{#each burgers}}
+  <li>
+    {{burger_name}}
+    </li>
+   
   {{/each}}
 </ul>
 </div>
@@ -33,7 +34,7 @@
 
     <div class="form-group mx-auto d-block">
         <label for="burg">Burger:</label>
-        <input type="text" id="burger-submit" name="burger">
+        <input type="text" id="burger-submit" name="name">
     </div>
             <button id= "create-form" class="btn btn-primary mx-auto d-block" type="submit">Add Burger</button>
             </form>

@@ -5,37 +5,38 @@ var router = express.Router();
 var Burger = require("../models/burger.js");
 
 // Create all our routes and set up logic within those routes where required.
-router.get("/", function(req, res) {
-    Burger.selectAll(function(data) {
-      var hbsObject = {
-        burgers: data
-      };
-      console.log(hbsObject);
-      res.render("index", hbsObject);
-    });
+router.get("/", function (req, res) {
+  Burger.all(function (data) {
+    var hbsObject = {
+      burgers: data
+    };
+    console.log(hbsObject);
+    res.render("index", hbsObject);
   });
-  
-  router.post("/api/posts", function(req, res) {
-    Burger.insertOne(["burger_name"], [req.body.burger_name], function(result) {
-      // Send back the ID of the new quote
-      res.json({ id: result.insertId });
-      console.log( res.json({ id: result.insertId }));
-    });
-  });
+});
 
-  router.put("/api/put", function(req, res) {
-    Burger.update(["name"], [req.body.name], function(result) {
-      // Send back the ID of the new quote
-      res.json({ id: result.insertId });
-      console.log( res.json({ id: result.insertId }));
-    });
+router.post("/api/posts", function (req, res) {
+  console.log(req.body.burger_name)
+  Burger.create(["burger_name"], [req.body.burger_name], function (result) {
+    // Send back the ID of the new quote
+    res.json({ id: result.insertId });
+    console.log(res.json({ id: result.insertId }));
   });
-  
+});
+
+router.put("/api/put", function (req, res) {
+  Burger.update(["burger_name"], [req.body.burger_name], function (result) {
+    // Send back the ID of the new quote
+    res.json({ id: result.insertId });
+    console.log(res.json({ id: result.insertId }));
+  });
+});
+
 //   router.put("/api/cats/:id", function(req, res) {
 //     var condition = "id = " + req.params.id;
-  
+
 //     console.log("condition", condition);
-  
+
 //     cat.update(
 //       {
 //         devou: req.body.sleepy
@@ -47,7 +48,7 @@ router.get("/", function(req, res) {
 //           return res.status(404).end();
 //         }
 //         res.status(200).end();
-  
+
 //       }
 //     );
 //   });
