@@ -17,18 +17,43 @@ router.get("/", function (req, res) {
 
 router.post("/api/posts", function (req, res) {
   console.log(req.body.burger_name)
-  Burger.create(["burger_name"], [req.body.burger_name], function (result) {
+  Burger.create([
+    "burger_name", "devoured"
+  ], [req.body.burger_name, req.body.devoured
+  ], function (result) {
     // Send back the ID of the new quote
     res.json({ id: result.insertId });
     console.log(res.json({ id: result.insertId }));
   });
 });
 
-router.put("/api/put", function (req, res) {
-  Burger.update(["burger_name"], [req.body.burger_name], function (result) {
-    // Send back the ID of the new quote
-    res.json({ id: result.insertId });
-    console.log(res.json({ id: result.insertId }));
+router.put("/api/posts/:id", function (req, res) {
+  var condition = "id = " + req.params.id;
+
+  console.log("condition", condition);
+
+  Burger.update({
+    devoured: req.body.devoured
+  }, condition, function(result) {
+    if (result.changedRows == 0) {
+      // If no rows were changed, then the ID must not exist, so 404
+      return res.status(404).end();
+    } else {
+      res.status(200).end();
+    }
+  });
+});
+
+router.delete("/api/posts/:id", function(req, res) {
+  var condition = "id = " + req.params.id;
+
+  Burger.delete(condition, function(result) {
+    if (result.affectedRows == 0) {
+      // If no rows were changed, then the ID must not exist, so 404
+      return res.status(404).end();
+    } else {
+      res.status(200).end();
+    }
   });
 });
 

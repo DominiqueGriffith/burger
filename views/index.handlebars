@@ -2,16 +2,34 @@
      <div class="w-100"></div>
 <div class="row">
     <div class="col-md-6">
-        <button  id="devour">Devour it!</button>
+
+
+Burgers devoured   
+
 <ul>
+    
   {{#each burgers}}
-  <li>
-    {{burger_name}}
-    </li>
-   
+  
+     {{#unless devoured}}
+      {{> burgers/devour-block devoured=true}}
+    {{/unless}}
+  {{/each}}
+
+
+</ul>
+
+Burgers that are not devoured
+
+ <ul>
+  {{#each burgers}}
+    {{#if devoured}}
+      {{> burgers/devour-block devoured=false}}
+    {{/if}}
   {{/each}}
 </ul>
 </div>
+
+
 
 
 
