@@ -3,6 +3,21 @@
 <div class="row">
     <div class="col-md-6">
 
+Burgers that are not devoured
+
+ <ul>
+  {{#each burgers}}
+    {{#if devoured}}
+      {{> burgers/devour-block devoured=false}}
+    {{/if}}
+  {{/each}}
+</ul>
+
+
+</div>
+
+<div class="col-md-6">
+
 
 Burgers devoured   
 
@@ -18,29 +33,9 @@ Burgers devoured
 
 </ul>
 
-Burgers that are not devoured
-
- <ul>
-  {{#each burgers}}
-    {{#if devoured}}
-      {{> burgers/devour-block devoured=false}}
-    {{/if}}
-  {{/each}}
-</ul>
-</div>
-
-
-
-
-
-    <div class="col-md-6">
-
-
-
-
-
 
 </div>
+
 </div>
 <br>
  <div class="w-100"></div>

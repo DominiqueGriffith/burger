@@ -21,9 +21,14 @@ router.post("/api/posts", function (req, res) {
     "burger_name", "devoured"
   ], [req.body.burger_name, req.body.devoured
   ], function (result) {
+
+    // if (!req.body.burger_name, req.body.devoured){
+    //   return res.status(404).end();
+      
+    // }
     // Send back the ID of the new quote
     res.json({ id: result.insertId });
-    console.log(res.json({ id: result.insertId }));
+    // console.log(res.json({ id: result.insertId }));
   });
 });
 
